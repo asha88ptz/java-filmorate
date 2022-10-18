@@ -25,7 +25,7 @@ public class FilmController {
     }
 
     @PostMapping()
-    public Film create(@RequestBody Film film) {
+    public Film add(@RequestBody Film film) {
         log.debug("Got request to endpoint 'POST /films'.");
         try {
             film.setId(idGenerator.next());
@@ -40,14 +40,14 @@ public class FilmController {
     }
 
     @PutMapping()
-    public Film update(@RequestBody Film film) {
+    public Film put(@RequestBody Film film) {
         log.debug("Got request to endpoint 'PUT /films'.");
         try {
             if (film.getId() == null) {
-                throw new MissingIdException("Film Id is missing.");
+                throw new MissingIdException("Missing film id.");
             }
             if (!films.containsKey(film.getId())) {
-                throw new NotFoundException("Not found film with id " + film.getId() + " .");
+                throw new NotFoundException("Film with id " + film.getId() + " not found.");
             }
             validate(film);
         } catch( StorageException | ValidationException e) {
@@ -61,16 +61,16 @@ public class FilmController {
 
     void validate(Film film)  {
         if (film.getName().isBlank()) {
-            throw new ValidationException("The Film name shouldn't be blank.");
+            throw new ValidationException("Invalid film name");
         }
         if (film.getDescription().length() > Film.MAX_DESCRIPTION_LENGTH) {
-            throw new ValidationException("The length of the Film description is longer than allowed.");
+            throw new ValidationException("Invalid film description");
         }
         if (film.getReleaseDate().isBefore(Film.MIN_RELEASE_DATE)) {
-            throw new ValidationException("The Film's release date is too early.");
+            throw new ValidationException("Invalid film release date");
         }
         if (film.getDuration() == null || film.getDuration() < 0) {
-            throw new ValidationException("The duration of the Film should be positive.");
+            throw new ValidationException("Invalid film duration");
         }
     }
 }

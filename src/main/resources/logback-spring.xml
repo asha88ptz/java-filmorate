@@ -15,7 +15,7 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOGS}/filmorate.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>DEBUG</level>
         </filter>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -39,8 +39,8 @@
         <appender-ref ref="Console" />
     </root>
 
-    <!-- LOG "ru.yandex.practicum.filmorate.*" at DEBUG level -->
-    <logger name="ru.yandex.practicum.filmorate" level="debug" additivity="false">
+    <!-- LOG "ru.yandex.practicum.filmorate.*" at TRACE level -->
+    <logger name="ru.yandex.practicum.filmorate" level="trace" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>

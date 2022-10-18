@@ -11,11 +11,11 @@ import static  java.time.Month.DECEMBER;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Film {
-    Integer id;
-    String name;
-    String description;
-    LocalDate releaseDate;
-    Integer duration;
+    private Integer id;
+    private String name;
+    private String description;
+    private LocalDate releaseDate;
+    private Integer duration;
 
     public static final Integer MAX_DESCRIPTION_LENGTH = 200;
     public static final LocalDate MIN_RELEASE_DATE = LocalDate.of(1895, DECEMBER, 28);
